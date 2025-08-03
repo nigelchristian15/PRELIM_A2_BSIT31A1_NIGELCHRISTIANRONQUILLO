@@ -1,0 +1,31 @@
+@model List<LibraryManagementSystem.Models.Book>
+
+<h2>Library Book List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Is Available</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model) {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author?.Name</td>
+                <td>@book.Genre</td>
+                <td>@book.IsAvailable</td>
+                <td>
+                    @if (book.IsAvailable) {
+                        <a class="btn btn-sm btn-primary" asp-action="Borrow" asp-route-id="@book.Id">Borrow</a>
+                    } else {
+                        <a class="btn btn-sm btn-success" asp-action="Return" asp-route-id="@book.Id">Return</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
